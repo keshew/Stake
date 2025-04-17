@@ -3,6 +3,18 @@ import SwiftUI
 struct StakeAuthView: View {
     @StateObject var stakeAuthModel =  StakeAuthViewModel()
     
+    func setSize() -> CGFloat {
+        if UIScreen.main.bounds.size.width > 900 {
+            return 100
+        } else if UIScreen.main.bounds.size.width > 700 {
+            return 100
+        } else if UIScreen.main.bounds.size.width < 390 {
+            return 100
+        } else {
+            return 40
+        }
+    }
+    
     var body: some View {
         ZStack {
             LinearGradient(colors: [Color.lightMain, Color.darkMain], startPoint: .top, endPoint: .bottom)
@@ -11,7 +23,7 @@ struct StakeAuthView: View {
             ScrollView(showsIndicators: false) {
                 VStack(alignment: .trailing) {
                     Color(.clear)
-                        .frame(height: 40)
+                        .frame(height: setSize())
                     
                     Rectangle()
                         .fill(.darkMain)

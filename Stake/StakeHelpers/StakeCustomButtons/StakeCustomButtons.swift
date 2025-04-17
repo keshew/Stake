@@ -52,7 +52,19 @@ struct CustomTracker: View {
                 )
             }
             .frame(width: UIScreen.main.bounds.size.width * 0.9, height: 45)
-            .padding(.top, 60)
+            .padding(.top, setSize())
+        }
+    }
+    
+    func setSize() -> CGFloat {
+        if UIScreen.main.bounds.size.width > 900 {
+            return 120
+        } else if UIScreen.main.bounds.size.width > 700 {
+            return 120
+        } else if UIScreen.main.bounds.size.width < 390 {
+            return 120
+        } else {
+            return 60
         }
     }
 }
@@ -126,7 +138,18 @@ struct CustomTabBar: View {
                 )
             }
             .padding(.top, 5)
-            .frame(height: 50)
+            .frame(height: setSize())
+        }
+    }
+    func setSize() -> CGFloat{
+        if UIScreen.main.bounds.size.width > 900 {
+            return 155
+        } else if UIScreen.main.bounds.size.width > 700 {
+            return 155
+        } else if UIScreen.main.bounds.size.width < 390 {
+            return 155
+        } else {
+            return 50
         }
     }
 }
@@ -155,10 +178,16 @@ struct StakeCalendar: View {
     @StateObject var stakeTrackerModel = StakeTrackerViewModel()
     @State private var currentDate = Date()
     let cellSpacing: CGFloat = 14
-    @State private var sheetOffsetY: CGFloat = UIScreen.main.bounds.height * 0.26
-    private let sheetHeightRatio: CGFloat = 0.35
+    @State private var sheetOffsetY: CGFloat = UIScreen.main.bounds.height * (UIScreen.main.bounds.width > 700 ? 0.3 : 0.26)
+
+    private var sheetHeightRatio: CGFloat {
+        UIScreen.main.bounds.width > 700 ? 0.35 : 0.35
+    }
+    private var maxOffsetY: CGFloat {
+        UIScreen.main.bounds.width > 700 ? UIScreen.main.bounds.height * 0.3 : UIScreen.main.bounds.height * 0.26
+    }
+
     private let minOffsetY: CGFloat = 0
-    private var maxOffsetY: CGFloat { UIScreen.main.bounds.height * 0.26}
     @State private var isEditing = false
     @State private var taskText = ""
     @State private var categories: [CategoryModel] = []
@@ -227,6 +256,18 @@ struct StakeCalendar: View {
             tasks[index].isDone = false
             tasks[index].categoryId = nil
             userDefaultsManager.saveTasks(tasks)
+        }
+    }
+    
+    func setSize() -> CGFloat {
+        if UIScreen.main.bounds.size.width > 900 {
+            return 190
+        } else if UIScreen.main.bounds.size.width > 700 {
+            return 190
+        } else if UIScreen.main.bounds.size.width < 390 {
+            return 190
+        } else {
+            return 115
         }
     }
     
@@ -346,7 +387,7 @@ struct StakeCalendar: View {
                     Color(.clear)
                         .frame(height: 20)
                 }
-                .padding(.top, 115)
+                .padding(.top, setSize())
                 
                 //MARK: - panel
                 VStack {
@@ -779,11 +820,23 @@ struct DailyTaskView: View {
         }
     }
     
+    func setSize() -> CGFloat {
+        if UIScreen.main.bounds.size.width > 900 {
+            return 190
+        } else if UIScreen.main.bounds.size.width > 700 {
+            return 190
+        } else if UIScreen.main.bounds.size.width < 390 {
+            return 190
+        } else {
+            return 115
+        }
+    }
+    
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack {
                 Color(.clear)
-                    .frame(height: 90)
+                    .frame(height: setSize())
                 
                 VStack(spacing: 5) {
                     Rectangle()

@@ -6,6 +6,18 @@ struct StakeProfileView: View {
     @State private var isEditing = false
     @State private var newNickname: String = ""
     
+    func setSize() -> CGFloat {
+        if UIScreen.main.bounds.size.width > 900 {
+            return 100
+        } else if UIScreen.main.bounds.size.width > 700 {
+            return 100
+        } else if UIScreen.main.bounds.size.width < 390 {
+            return 100
+        } else {
+            return 40
+        }
+    }
+    
     var body: some View {
         ZStack {
             LinearGradient(colors: [Color.lightMain, Color.darkMain], startPoint: .top, endPoint: .bottom)
@@ -14,7 +26,7 @@ struct StakeProfileView: View {
             ScrollView(showsIndicators: false) {
                 VStack {
                     Color(.clear)
-                        .frame(height: 40)
+                        .frame(height: setSize())
                     
                     HStack(spacing: 25) {
                         Image(userDefaultsManager.selectedAvatar)

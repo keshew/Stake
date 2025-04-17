@@ -143,6 +143,42 @@ struct StatisticView: View {
         return chartData
       }
     
+    func setSize() -> CGFloat {
+        if UIScreen.main.bounds.size.width > 900 {
+            return 180
+        } else if UIScreen.main.bounds.size.width > 700 {
+            return 180
+        } else if UIScreen.main.bounds.size.width < 390 {
+            return 180
+        } else {
+            return 100
+        }
+    }
+    
+    func setSpacing() -> CGFloat {
+        if UIScreen.main.bounds.size.width > 900 {
+            return 21.5
+        } else if UIScreen.main.bounds.size.width > 700 {
+            return 14.5
+        } else if UIScreen.main.bounds.size.width < 390 {
+            return -0.5
+        } else {
+            return 0.4
+        }
+    }
+    
+    func setPadding() -> CGFloat {
+        if UIScreen.main.bounds.size.width > 900 {
+            return -490
+        } else if UIScreen.main.bounds.size.width > 700 {
+            return -380
+        } else if UIScreen.main.bounds.size.width < 390 {
+            return -170
+        } else {
+            return -175
+        }
+    }
+    
     var body: some View {
         ZStack {
             ScrollView(showsIndicators: false) {
@@ -295,7 +331,7 @@ struct StatisticView: View {
                                     GeometryReader { geo in
                                         VStack(alignment: .leading) {
                                             Spacer()
-                                            HStack(alignment: .bottom, spacing: 0.4) {
+                                            HStack(alignment: .bottom, spacing: setSpacing()) {
                                                 ForEach(monthlyData) { data in
                                                     VStack(spacing: 0) {
                                                         Text("\(Int(data.value))")
@@ -345,7 +381,7 @@ struct StatisticView: View {
                                         Text("Completed tasks")
                                             .Stake(size: 20)
                                             .rotationEffect(.degrees(270))
-                                            .offset(x: -175)
+                                            .offset(x: setPadding())
                                         Text("Days")
                                             .Stake(size: 20)
                                             .offset(y: 120)
@@ -405,7 +441,7 @@ struct StatisticView: View {
                 }
                 .padding(.top)
             }
-            .padding(.top, 100)
+            .padding(.top, setSize())
         }
         .onAppear {
             loadData()

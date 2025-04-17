@@ -245,6 +245,7 @@ class GameSpriteKit: SKScene, SKPhysicsContactDelegate {
         if collision == PhysicsCategory.ball | PhysicsCategory.wall {
             if contact.contactPoint.y < 50 {
                 game?.isEnd = true
+                scene?.isPaused = true
                 UserDefaultsManager().minusLifes(life: 1)
             }
         }

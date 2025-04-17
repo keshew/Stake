@@ -5,6 +5,19 @@ struct StakeGamesView: View {
     @State var isWheel = false
     @State var isBreak = false
     @State var isPenalty = false
+    
+    func setSize() -> CGFloat {
+        if UIScreen.main.bounds.size.width > 900 {
+            return 120
+        } else if UIScreen.main.bounds.size.width > 700 {
+            return 120
+        } else if UIScreen.main.bounds.size.width < 390 {
+            return 120
+        } else {
+            return 60
+        }
+    }
+    
     var body: some View {
         ZStack {
             LinearGradient(colors: [Color.lightMain, Color.darkMain], startPoint: .top, endPoint: .bottom)
@@ -13,7 +26,7 @@ struct StakeGamesView: View {
             ScrollView(showsIndicators: false) {
                 VStack {
                     Color(.clear)
-                        .frame(height: 60)
+                        .frame(height: setSize())
                     
                     HStack {
                         HStack {

@@ -11,13 +11,38 @@ struct StakeAvatarView: View {
     @State private var newNickname: String = ""
     @StateObject var userDefaultsManager = UserDefaultsManager()
     @State var forRefresh = 0
+    
+    func setSize() -> CGFloat {
+        if UIScreen.main.bounds.size.width > 900 {
+            return UIScreen.main.bounds.height / 13
+        } else if UIScreen.main.bounds.size.width > 700 {
+            return UIScreen.main.bounds.height / 13
+        } else if UIScreen.main.bounds.size.width < 390 {
+            return UIScreen.main.bounds.height / 8
+        } else {
+            return UIScreen.main.bounds.height / 8
+        }
+    }
+    
+    func setPadding() -> CGFloat {
+        if UIScreen.main.bounds.size.width > 900 {
+            return 50
+        } else if UIScreen.main.bounds.size.width > 700 {
+            return 50
+        } else if UIScreen.main.bounds.size.width < 390 {
+            return 20
+        } else {
+            return 20
+        }
+    }
+    
     var body: some View {
         ZStack {
             LinearGradient(colors: [Color.lightMain, Color.darkMain], startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea()
             
             Color(red: 14/255, green: 31/255, blue: 43/255)
-                .frame(height: UIScreen.main.bounds.height / 8)
+                .frame(height: setSize())
                 .ignoresSafeArea(edges: .top)
                 .shadow(radius: 5, y: 5)
                 .position(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height / 27)
@@ -114,7 +139,7 @@ struct StakeAvatarView: View {
                         
                         Spacer()
                     }
-                    .padding(.top)
+                    .padding(.top, setPadding())
                 }
                 
                 ScrollView(showsIndicators: false) {
