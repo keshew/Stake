@@ -790,12 +790,23 @@ struct DailyTaskView: View {
     private let userDefaultsManager = UserDefaultsManager()
     
     private var doneTasks: [TaskModel] {
-        tasks.filter { $0.isDone && $0.categoryId == nil }
+        let today = Date()
+        return tasks.filter { task in
+            task.isDone &&
+            task.categoryId == nil &&
+            Calendar.current.isDate(task.date, inSameDayAs: today)
+        }
     }
-    
+
     private var unDoneTasks: [TaskModel] {
-        tasks.filter { !$0.isDone && $0.categoryId == nil }
+        let today = Date()
+        return tasks.filter { task in
+            !task.isDone &&
+            task.categoryId == nil &&
+            Calendar.current.isDate(task.date, inSameDayAs: today)
+        }
     }
+
     
     private func saveTask() {
         guard !taskText.isEmpty else { return }
