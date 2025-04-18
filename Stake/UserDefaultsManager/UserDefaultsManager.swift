@@ -299,11 +299,9 @@ class UserDefaultsManager: ObservableObject {
     func logout() {
         let defaults = UserDefaults.standard
         saveLoginStatus(false)
-        defaults.removeObject(forKey: "users")
         defaults.removeObject(forKey: "progress")
         defaults.removeObject(forKey: "selectedAvatar")
         defaults.removeObject(forKey: "avatars")
-        defaults.removeObject(forKey: "userEmail")
     }
     
     func getNickname(for email: String) -> String? {
