@@ -210,7 +210,7 @@ struct CalendarDayCell: View {
     var isSelected: Bool = false
     var body: some View {
         ZStack {
-            if isToday {
+            if isSelected {
                 RoundedRectangle(cornerRadius: 0)
                     .fill(isToday ? Color(red: 14/255, green: 31/255, blue: 43/255) : Color(red: 26/255, green: 44/255, blue: 57/255))
                     .overlay {
