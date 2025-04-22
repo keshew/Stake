@@ -101,6 +101,11 @@ struct StakeGamesView: View {
                     }
                     .padding(.horizontal)
                     
+                    Text(stakeGamesModel.contact.text.randomElement() ?? "")
+                        .Stake(size: 30)
+                        .padding(.top)
+                        .multilineTextAlignment(.center)
+                    
                     Rectangle()
                         .fill(Color(red: 14/255, green: 31/255, blue: 43/255))
                         .frame(height: 40)
